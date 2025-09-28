@@ -1,31 +1,37 @@
+// FIX: Removed self-import of 'User' type which was causing a conflict with its own declaration.
+
 export interface User {
   id: string;
   username: string;
   profilePicture: string;
-  bio: string;
-  following: string[]; 
+  following: string[];
   followers: string[];
-  ratings: Rating[];
+  socialLinks?: {
+    google?: string;
+    facebook?: string;
+  }
 }
 
 export interface Rating {
   userId: string;
-  value: number; // 1-10
+  score: number; // 1 to 10
 }
 
 export interface Story {
   id: string;
-  authorId: string;
   title: string;
   content: string;
   coverImage: string;
-  likes: string[]; // array of userIds
+  authorId: string;
   ratings: Rating[];
-  createdAt: Date;
+  likes: string[]; // Array of user IDs
 }
 
-export type View =
-  | { page: 'home' }
-  | { page: 'story'; storyId: string }
-  | { page: 'profile'; userId: string }
-  | { page: 'write'; storyId?: string };
+export interface Artwork {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
+  authorId: string;
+  likes: string[]; // Array of user IDs
+}
